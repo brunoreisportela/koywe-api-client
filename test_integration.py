@@ -5,6 +5,10 @@ Integration test script for Koywe API client
 
 import sys
 import os
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 # Add the current directory to the path so we can import the client
 sys.path.insert(0, os.path.dirname(__file__))
@@ -17,17 +21,28 @@ def test_authentication():
     
     print("=== Testing Koywe API Integration ===\n")
     
-    # Provided credentials
-    client_id = "685d4834fd0d9c8dc740eebb"
-    client_secret = "eV8o8f1mVRgjbgMle0yMfT6aZEgTalYZ"
+    # Load credentials from environment variables
+    client_id = os.getenv("KOYWE_CLIENT_ID")
+    client_secret = os.getenv("KOYWE_CLIENT_SECRET")
     
-    # Note: Username and password are required but not provided
-    # These would typically be your API username/password, not website credentials
-    username = input("Enter your API username: ").strip()
-    password = input("Enter your API password: ").strip()
+    if not client_id or not client_secret:
+        print("❌ Missing credentials in environment variables")
+        print("Please ensure KOYWE_CLIENT_ID and KOYWE_CLIENT_SECRET are set in your .env file")
+        return False
+    
+    # Try to load username and password from environment variables first
+    username = os.getenv("KOYWE_USERNAME")
+    password = os.getenv("KOYWE_PASSWORD")
+    
+    # If not in environment variables, prompt user
+    if not username:
+        username = input("Enter your API username: ").strip()
+    if not password:
+        password = input("Enter your API password: ").strip()
     
     if not username or not password:
         print("❌ Username and password are required for authentication")
+        print("You can set KOYWE_USERNAME and KOYWE_PASSWORD in your .env file to avoid prompts")
         return False
     
     try:

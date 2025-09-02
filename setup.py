@@ -18,7 +18,7 @@ setup(
     description="Python client library for Koywe e-invoicing API",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/breisportela/koywe-api-client",
+    url="https://github.com/brunoreisportela/koywe-api-client",
     packages=find_packages(),
     classifiers=[
         "Development Status :: 4 - Beta",
@@ -39,8 +39,8 @@ setup(
     install_requires=requirements,
     keywords="koywe, e-invoicing, api, client, billing, invoice",
     project_urls={
-        "Bug Reports": "https://github.com/yourusername/koywe-api-client/issues",
-        "Source": "https://github.com/yourusername/koywe-api-client",
+        "Bug Reports": "https://github.com/brunoreisportela/koywe-api-client/issues",
+        "Source": "https://github.com/brunoreisportela/koywe-api-client",
         "Documentation": "https://docs.koywe.com/billing/introduction/👋-welcome",
     },
 )

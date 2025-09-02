@@ -5,6 +5,10 @@ Basic usage example for Koywe API client
 
 import sys
 import os
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 # Add the parent directory to the path so we can import the client
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
@@ -15,12 +19,23 @@ from koywe_api_client import KoyweClient, KoyweAPIError
 def main():
     """Demonstrate basic usage of the Koywe API client"""
     
+    # Load credentials from environment variables
+    client_id = os.getenv("KOYWE_CLIENT_ID")
+    client_secret = os.getenv("KOYWE_CLIENT_SECRET")
+    username = os.getenv("KOYWE_USERNAME", "your_username")  # Default fallback
+    password = os.getenv("KOYWE_PASSWORD", "your_password")  # Default fallback
+    
+    if not client_id or not client_secret:
+        print("❌ Missing credentials in environment variables")
+        print("Please ensure KOYWE_CLIENT_ID and KOYWE_CLIENT_SECRET are set in your .env file")
+        return
+    
     # Initialize the client with your credentials
     client = KoyweClient(
-        client_id="685d4834fd0d9c8dc740eebb",
-        client_secret="eV8o8f1mVRgjbgMle0yMfT6aZEgTalYZ",
-        username="your_username",  # Replace with your actual username
-        password="your_password",  # Replace with your actual password
+        client_id=client_id,
+        client_secret=client_secret,
+        username=username,
+        password=password,
         auto_authenticate=False  # Don't authenticate immediately for this example
     )
     
